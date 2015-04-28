@@ -1,18 +1,26 @@
 import java.util.Hashtable;
 
-
 public class Main {
 
 	public static void main(String[] args) {
-		Hashtable<String,Long> h = new Hashtable<String,Long>(8);
-		h.put("Mamba", 100L);
-		Thread t1 = new Thread(new DanceCard(new Hashtable<String,Long>(8),2),"L");
-		Thread t2 = new Thread(new DanceCard(h,2),"F");
-		h.put("weiner", 50L);
-		Thread t3 = new Thread(new DanceCard(h,2),"F");
-		t2.start();t1.start();t3.start();
-		try {t1.join();t2.join();t3.join();} 
-		catch (InterruptedException e) {e.printStackTrace();}
+		Hashtable<String,Long> defaultTable = new Hashtable<String,Long>(8);
+		defaultTable.put("Waltz", -1L);
+		defaultTable.put("Tango", -1L);
+		defaultTable.put("Foxtrot", -1L);
+		defaultTable.put("Quickstep", -1L);
+		defaultTable.put("Rumba", -1L);
+		defaultTable.put("Samba", -1L);
+		defaultTable.put("Cha Cha", -1L);
+		defaultTable.put("Jive", -1L);
+		
+		Follower[] flist = new Follower[2];
+		flist[0] = new Follower(defaultTable);
+		flist[1] = new Follower(defaultTable);
+		flist[0].start();flist[1].start();
+		
+		
+		Leader l =  new Leader(defaultTable,flist);
+		l.start();
 	}
 
 }
