@@ -3,24 +3,26 @@ import java.util.Hashtable;
 public class Main {
 
 	public static void main(String[] args) {
-		Hashtable<String,Long> defaultTable = new Hashtable<String,Long>(8);
-		defaultTable.put("Waltz", -1L);
-		defaultTable.put("Tango", -1L);
-		defaultTable.put("Foxtrot", -1L);
-		defaultTable.put("Quickstep", -1L);
-		defaultTable.put("Rumba", -1L);
-		defaultTable.put("Samba", -1L);
-		defaultTable.put("Cha Cha", -1L);
-		defaultTable.put("Jive", -1L);
+		Hashtable<String,Integer> defaultTable = new Hashtable<String,Integer>(8);
+		defaultTable.put("Waltz", -1);
+		defaultTable.put("Tango", -1);
+		defaultTable.put("Foxtrot", -1);
+		defaultTable.put("Quickstep", -1);
+		defaultTable.put("Rumba", -1);
+		defaultTable.put("Samba", -1);
+		defaultTable.put("Cha Cha", -1);
+		defaultTable.put("Jive", -1);
 		
-		Follower[] flist = new Follower[2];
-		flist[0] = new Follower(defaultTable);
-		flist[1] = new Follower(defaultTable);
-		flist[0].start();flist[1].start();
+		Buffer b = new Buffer();
 		
+		Leader l = new Leader(b,defaultTable,1);
+		Leader l2 = new Leader(b,defaultTable,2);
+		Follower f = new Follower(b,defaultTable,1);
+		Follower f2 = new Follower(b,defaultTable,2);
+		l.start();l2.start();f.start();f2.start();
+		try{l.join();l2.join();f.join();f2.join();}catch (InterruptedException e){e.printStackTrace();}
+		System.out.println("Leader 1: " + l.getTable() + "\nLeader 2: " + l2.getTable());
 		
-		Leader l =  new Leader(defaultTable,flist);
-		l.start();
 	}
 
 }
