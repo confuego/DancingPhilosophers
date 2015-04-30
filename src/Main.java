@@ -15,13 +15,14 @@ public class Main {
 		
 		Buffer b = new Buffer();
 		
-		Leader l = new Leader(b,defaultTable,1);
-		Leader l2 = new Leader(b,defaultTable,2);
+		Leader l = new Leader(b,defaultTable,1,2);
+		Leader l2 = new Leader(b,defaultTable,2,2);
 		Follower f = new Follower(b,defaultTable,1);
 		Follower f2 = new Follower(b,defaultTable,2);
+		
+		
 		l.start();l2.start();f.start();f2.start();
 		try{l.join();l2.join();f.join();f2.join();}catch (InterruptedException e){e.printStackTrace();}
-		System.out.println("Leader 1: " + l.getTable() + "\nLeader 2: " + l2.getTable());
 		
 	}
 

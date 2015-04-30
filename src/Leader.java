@@ -1,58 +1,31 @@
 import java.util.Hashtable;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Leader extends Thread {
-	private Buffer b;
-	private Hashtable<String,Integer> table;
+	Buffer b;
+	Hashtable<String,Integer> danceCard;
 	int id;
-	public Leader(Buffer b,Hashtable<String,Integer> table, int id){
-		this.b = b;
-		this.table = table;
-		this.id = id;
-	}
+	int followerCount;
+
 	
-	public int gId(){
-		return this.id;
+	public Leader(Buffer b,Hashtable<String,Integer> table, int id,int followerCount){
+		this.b = b;
+		this.danceCard = table;
+		this.id = id;
+		this.followerCount = followerCount;
 	}
 	
 	public void run(){
-		System.out.println("Leader: " + gId());
-		Follower follower = b.takeValue();
-		while(follower == null){
-			follower = b.takeValue();
+		for(int x=0;x<followerCount;x++){
+			Follower current;
+			do{
+				current = b.takeValue(id);
+			}while(current == null);
+			System.out.println("Leader " + id + " is looking at Follower " + current.id);
+			b.releaseLeader();
+			System.out.println("Leader " + id + " is done looking at Follower " + current.id);
+			b.releaseFollower();
 		}
-		
-		this.compare(follower);
-		
-	}
-	public synchronized boolean compare(Follower current){
-		
-		int follower_id =  current.gId();
-		int danceCount = 0;
-		Hashtable<String,Integer> current_table = current.getTable();
-		
-		
-		for(String key : table.keySet()){
-			if(table.get(key) == follower_id){
-				danceCount++;
-			}
-		}
-		if(danceCount >= 2){
-			System.out.println("can't!");
-		}
-		
-		for(String key : current.getTable().keySet()){
-			if(table.get(key) == -1 && current_table.get(key) == -1 && danceCount < 2){
-				danceCount++;
-				table.put(key, current.gId());current_table.put(key, gId());
-			}
-		}
-		current.setTable(current_table);
-		b.returnAndRelease(current);
-		return true;
-	}
-	
-	public Hashtable<String,Integer> getTable(){
-		return this.table;
-	}
+	 }
 }
