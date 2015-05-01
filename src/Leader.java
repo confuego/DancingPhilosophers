@@ -56,7 +56,10 @@ public class Leader extends Thread{
 	public synchronized void printTable(){
 		System.out.println("Leader: " + this.id);
 		for(String key : this.danceCard.keySet()){
-			if(this.danceCard.get(key) == -1)
+			if(key.equals("Quickstep") && this.danceCard.get(key)==-1){
+				System.out.println(key + "\t------");
+			}
+			else if(this.danceCard.get(key) == -1)
 				System.out.println(key + "\t\t" + "------");
 			else if(key.equals("Quickstep") && this.danceCard.get(key)!=-1){
 				System.out.println(key + "\twith " + this.danceCard.get(key));
