@@ -1,40 +1,41 @@
 import java.util.Hashtable;
 import java.util.concurrent.atomic.*;
 public class Buffer {
-	Follower current;
-	AtomicBoolean inUse = new AtomicBoolean(false);
-	AtomicBoolean leaderUsing = new AtomicBoolean(false);
+	Follower[] vals;
+	int low,high,size;
+	public Buffer(int len){
+		vals = new Follower[len];
+	}
 	
-	public synchronized void insertValue(Follower request){
-		if(inUse.get()){
-			//System.out.println("Waiting..");
-			try {wait();} catch (InterruptedException e) {e.printStackTrace();}
+	public synchronized void put(Follower v){
+		while(size==vals.length){
+			try{this.wait();}catch(InterruptedException e){e.printStackTrace();}
 		}
-		inUse.set(true);
-		current = request;
-	}
-	
-	public synchronized void releaseFollower(){
-		notifyAll();
-		inUse.set(false);
-	}
-	
-	public synchronized void releaseLeader(){
-		leaderUsing.set(false);
+		vals[high] = v;
+		high = (high+1)%vals.length;
+		size++;
 		notifyAll();
 	}
-	
-	public synchronized void update(Follower update){
-		current = update;
+	public synchronized void update(Follower f){
+		int x=0;
+		for(Follower val : vals){
+			if(vals[x].equals(f)){
+				vals[x] = val;
+				notifyAll();
+			}
+			x++;
+		}
 	}
-	
-	public synchronized Follower takeValue(int id){
-		if(current == null)
-			return null;
-		if(leaderUsing.get())
-			try{System.out.println("Leader " + id + " is waiting for Follower " + current.id);wait();}catch(InterruptedException e){e.printStackTrace();}
-		System.out.println("Leader " + id +" grabbed Follower " + current.id);
-		leaderUsing.set(true);
-		return current;
+	public synchronized Follower get(){
+		Follower v;
+		
+		while(size<=0){
+			try{wait();}catch(InterruptedException e){e.printStackTrace();}
+		}
+		v = vals[low];
+		low = (low+1)%vals.length;
+		size--;
+		notifyAll();
+		return v;
 	}
 }

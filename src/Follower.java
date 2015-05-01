@@ -1,18 +1,27 @@
 import java.util.Hashtable;
-import java.util.concurrent.*;
-
 public class Follower extends Thread {
-	Buffer b;
-	Hashtable<String,Integer> danceCard;
+	Buffer buff;
 	int id;
-	public Follower(Buffer b,Hashtable<String,Integer> table, int id){
-		this.b = b;
-		this.danceCard = table;
+	Hashtable<String,Integer> danceCard = new Hashtable<String,Integer>(8);
+	int leaderCount;
+	
+	public Follower(Buffer b, int id,int leaderCount){
+		buff = b;
 		this.id = id;
+		this.leaderCount = leaderCount;
 	}
 	
 	public void run(){
-		System.out.println("Follower " + id +" has started. ");
-		b.insertValue(this);
+		danceCard.put("Waltz", -1);
+		danceCard.put("Tango", -1);
+		danceCard.put("Foxtrot", -1);
+		danceCard.put("Quickstep", -1);
+		danceCard.put("Rumba", -1);
+		danceCard.put("Samba", -1);
+		danceCard.put("Cha Cha", -1);
+		danceCard.put("Jive", -1);
+		for(int x=0;x<leaderCount;x++){
+			buff.put(this);
+		}
 	}
 }
