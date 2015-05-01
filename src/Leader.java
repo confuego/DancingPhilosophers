@@ -21,13 +21,13 @@ public class Leader extends Thread{
 		danceCard.put("Cha Cha", -1);
 		danceCard.put("Jive", -1);
 		for(int x=0;x<followerCount;x++){
-			synchronized(this){
+			//synchronized(this){
 				Follower f = buff.get();
 				//System.out.println("Leader " + id + " got Follower " + f.id);
 				//f.danceCard.put(String.valueOf(id),f.id);
 				this.compare(f);
 				//System.out.println("Leader " + id + " added " + f.danceCard + " to Follower " + f.id);
-			}
+			//}
 		}
 	}
 	
