@@ -1,7 +1,9 @@
 public class DanceCard {
 	int Waltz, Tango, Foxtrot, Quickstep, Rumba, Samba, ChaCha, Jive;
+	String type;
+	int id;
 
-	public DanceCard() {
+	public DanceCard(String type, int id) {
 		// set all dances to 0
 		Waltz = 0;
 		Tango = 0;
@@ -11,6 +13,8 @@ public class DanceCard {
 		Samba = 0;
 		ChaCha = 0;
 		Jive = 0;
+		this.type = type;
+		this.id = id;
 	}
 
 	public boolean hasDanced(String name) {

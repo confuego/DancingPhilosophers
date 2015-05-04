@@ -9,7 +9,7 @@ public class Leader extends Thread {
 	public DanceCard card;
 
 	public Leader(Buffer b, int id, int followerCount) {
-		this.card = new DanceCard();
+		this.card = new DanceCard("Leader", followerCount);
 		this.followerCount = followerCount;
 		buff = b;
 		this.id = id;
