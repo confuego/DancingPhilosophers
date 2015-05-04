@@ -56,4 +56,48 @@ public class DanceCard {
 
 		return (count >= 2);
 	}
+
+	@Override
+	public String toString() {
+
+		String toReturn = "Leader " + this.id + ":" + "\n";
+
+		if (Waltz != 0)
+			toReturn = toReturn + "Waltz\t\twith " + Waltz + "\n";
+		else
+			toReturn = toReturn + "Waltz\t\t------\n";
+		if (Tango != 0)
+			toReturn = toReturn + "Waltz\t\twith " + Tango + "\n";
+		else
+			toReturn = toReturn + "Waltz\t\t------\n";
+		if (Foxtrot != 0)
+			toReturn = toReturn + "Waltz\t\twith " + Foxtrot + "\n";
+		else
+			toReturn = toReturn + "Waltz\t\t------\n";
+		if (Quickstep != 0)
+			toReturn = toReturn + "Waltz\t\twith " + Quickstep + "\n";
+		else
+			toReturn = toReturn + "Waltz\t\t------\n";
+		if (Rumba != 0)
+			toReturn = toReturn + "Waltz\t\twith " + Rumba + "\n";
+		else
+			toReturn = toReturn + "Waltz\t\t------\n";
+		if (Samba != 0)
+			toReturn = toReturn + "Waltz\t\twith " + Samba + "\n";
+		else
+			toReturn = toReturn + "Waltz\t\t------\n";
+		if (ChaCha != 0)
+			toReturn = toReturn + "Waltz\t\twith " + ChaCha + "\n";
+		else
+			toReturn = toReturn + "Waltz\t\t------\n";
+		if (Jive != 0)
+			toReturn = toReturn + "Waltz\t\twith " + Jive + "\n";
+		else
+			toReturn = toReturn + "Waltz\t\t------\n";
+
+		toReturn = toReturn + "\n";
+
+		return toReturn;
+
+	}
 }
