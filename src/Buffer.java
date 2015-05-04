@@ -1,5 +1,3 @@
-import java.util.Hashtable;
-import java.util.concurrent.atomic.*;
 public class Buffer {
 	Follower[] vals;
 	int low,high,size;
