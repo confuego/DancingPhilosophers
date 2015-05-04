@@ -2,17 +2,20 @@ public class Main {
 
 	public static void main(String[] args) {
 
+		// decalre some needed variables
 		int numLeaders, numFollowers, count;
 
+		// set the leaders and followers if not passed in
 		if (args.length < 2) {
-			System.err.println("Defaulting to 2 leaders and 2 followers");
+			System.err.println("Defaulting to 2 leaders and 8 followers");
 			numLeaders = 2;
-			numFollowers = 2;
+			numFollowers = 8;
 		} else {
 			numLeaders = Integer.parseInt(args[0]);
 			numFollowers = Integer.parseInt(args[1]);
 		}
 
+		// set the count equal to 1
 		count = 1;
 
 		Leader[] leaderList = new Leader[numLeaders];
