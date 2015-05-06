@@ -20,17 +20,6 @@ public class Buffer {
 		notifyAll();
 	}
 
-	public synchronized void update(Follower f) {
-		int x = 0;
-		for (Follower val : vals) {
-			if (vals[x].equals(f)) {
-				vals[x] = val;
-				notifyAll();
-			}
-			x++;
-		}
-	}
-
 	public synchronized Follower get() {
 		Follower v;
 

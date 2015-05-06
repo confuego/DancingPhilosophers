@@ -2,7 +2,7 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		// decalre some needed variables
+		// declare some needed variables
 		int numLeaders, numFollowers, count;
 
 		// set the leaders and followers if not passed in
