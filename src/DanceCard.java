@@ -17,6 +17,20 @@ public class DanceCard {
 		this.id = id;
 	}
 
+	public static String[] songList() {
+		String[] songList = new String[8];
+		songList[0] = "Waltz";
+		songList[1] = "Tango";
+		songList[2] = "Foxtrot";
+		songList[3] = "Quickstep";
+		songList[4] = "Rumba";
+		songList[5] = "Samba";
+		songList[6] = "ChaCha";
+		songList[7] = "Jive";
+
+		return songList;
+	}
+
 	public boolean hasDanced(String name) {
 		if (name.equals("Waltz"))
 			return (Waltz != 0);
@@ -37,6 +51,43 @@ public class DanceCard {
 		// if dance doesn't exist, we aren't interested so we say we've already
 		// done that
 		return true;
+	}
+
+	public boolean danceWith(String name, Dancer partner) {
+		if (name.equals("Waltz") && (Waltz == 0)) {
+			this.Waltz = partner.id;
+			return true;
+		}
+		if (name.equals("Tango") && (Tango != 0)) {
+			this.Tango = partner.id;
+			return true;
+		}
+		if (name.equals("Foxtrot") && (Foxtrot != 0)) {
+			this.Foxtrot = partner.id;
+			return true;
+		}
+		if (name.equals("Quickstep") && (Quickstep != 0)) {
+			this.Quickstep = partner.id;
+			return true;
+		}
+		if (name.equals("Rumba") && (Rumba != 0)) {
+			this.Rumba = partner.id;
+			return true;
+		}
+		if (name.equals("Samba") && (Samba != 0)) {
+			this.Samba = partner.id;
+			return true;
+		}
+		if (name.equals("ChaCha") && (ChaCha != 0)) {
+			this.ChaCha = partner.id;
+			return true;
+		}
+		if (name.equals("Jive") && (Jive != 0)) {
+			this.Jive = partner.id;
+			return true;
+		}
+		// if it gets here return false
+		return false;
 	}
 
 	public boolean hasDancedWithTwice(int partnerID) {
@@ -64,40 +115,40 @@ public class DanceCard {
 	@Override
 	public String toString() {
 
-		String toReturn = "Leader " + this.id + ":" + "\n";
+		String toReturn = "\nLeader " + this.id + ":" + "\n";
 
 		if (Waltz != 0)
 			toReturn = toReturn + "Waltz\t\twith " + Waltz + "\n";
 		else
 			toReturn = toReturn + "Waltz\t\t------\n";
 		if (Tango != 0)
-			toReturn = toReturn + "Waltz\t\twith " + Tango + "\n";
+			toReturn = toReturn + "Tango\t\twith " + Tango + "\n";
 		else
-			toReturn = toReturn + "Waltz\t\t------\n";
+			toReturn = toReturn + "Tango\t\t------\n";
 		if (Foxtrot != 0)
-			toReturn = toReturn + "Waltz\t\twith " + Foxtrot + "\n";
+			toReturn = toReturn + "Foxtrot\t\twith " + Foxtrot + "\n";
 		else
-			toReturn = toReturn + "Waltz\t\t------\n";
+			toReturn = toReturn + "Foxtrot\t\t------\n";
 		if (Quickstep != 0)
-			toReturn = toReturn + "Waltz\t\twith " + Quickstep + "\n";
+			toReturn = toReturn + "Quickstep\twith " + Quickstep + "\n";
 		else
-			toReturn = toReturn + "Waltz\t\t------\n";
+			toReturn = toReturn + "Quickstep\t------\n";
 		if (Rumba != 0)
-			toReturn = toReturn + "Waltz\t\twith " + Rumba + "\n";
+			toReturn = toReturn + "Rumba\t\twith " + Rumba + "\n";
 		else
-			toReturn = toReturn + "Waltz\t\t------\n";
+			toReturn = toReturn + "Rumba\t\t------\n";
 		if (Samba != 0)
-			toReturn = toReturn + "Waltz\t\twith " + Samba + "\n";
+			toReturn = toReturn + "Samba\t\twith " + Samba + "\n";
 		else
-			toReturn = toReturn + "Waltz\t\t------\n";
+			toReturn = toReturn + "Samba\t\t------\n";
 		if (ChaCha != 0)
-			toReturn = toReturn + "Waltz\t\twith " + ChaCha + "\n";
+			toReturn = toReturn + "Cha Cha\t\twith " + ChaCha + "\n";
 		else
-			toReturn = toReturn + "Waltz\t\t------\n";
+			toReturn = toReturn + "Cha Cha\t\t------\n";
 		if (Jive != 0)
-			toReturn = toReturn + "Waltz\t\twith " + Jive + "\n";
+			toReturn = toReturn + "Jive\t\twith " + Jive + "\n";
 		else
-			toReturn = toReturn + "Waltz\t\t------\n";
+			toReturn = toReturn + "Jive\t\t------\n";
 
 		toReturn = toReturn + "\n";
 

@@ -1,17 +1,12 @@
-import java.util.Hashtable;
-public class Follower extends Thread {
-	Buffer buff;
-	int id;
-	Hashtable<String,Integer> danceCard = new Hashtable<String,Integer>(8);
-	int leaderCount;
-	
-	public Follower(Buffer b, int id,int leaderCount){
-		buff = b;
-		this.id = id;
-		this.leaderCount = leaderCount;
+public class Follower extends Dancer {
+
+	public Follower(Buffer b, int id, int otherCount) {
+		super(b, id, otherCount);
+		this.card = new DanceCard("Follower", id);
 	}
-	
-	public void run(){
+
+	@Override
+	public void run() {
 		danceCard.put("Waltz", -1);
 		danceCard.put("Tango", -1);
 		danceCard.put("Foxtrot", -1);
@@ -20,7 +15,9 @@ public class Follower extends Thread {
 		danceCard.put("Samba", -1);
 		danceCard.put("Cha Cha", -1);
 		danceCard.put("Jive", -1);
-		for(int x=0;x<leaderCount;x++){
+
+		// put each of these into the buffer
+		for (int x = 0; x < otherCount; x++) {
 			buff.put(this);
 		}
 	}

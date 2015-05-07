@@ -7,9 +7,9 @@ public class Main {
 
 		// set the leaders and followers if not passed in
 		if (args.length < 2) {
-			System.err.println("Defaulting to 2 leaders and 8 followers");
+			System.err.println("Defaulting to 2 leaders and 4 followers");
 			numLeaders = 2;
-			numFollowers = 8;
+			numFollowers = 4;
 		} else {
 			numLeaders = Integer.parseInt(args[0]);
 			numFollowers = Integer.parseInt(args[1]);
@@ -51,6 +51,7 @@ public class Main {
 		}
 		for (Leader l : leaderList) {
 			l.printTable();
+			// System.out.println(l.toString());
 			System.out.println();
 		}
 	}
