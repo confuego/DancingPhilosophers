@@ -26,7 +26,7 @@ waiting for a variable to change that isn't changing. Another way to get deadloc
 follower thread it's already danced with then it'll never stop. There two problems that arise, how to tell if you've already got dances with every follower, and
 if you don't, what dances can you do, and are there any followers who are available. The easiest way to inspect problems with the code is to print out every time
 a particular thread changes a variable, calls a function, etc, and then check to see if it every finished doing that instruction. If you think there might be a
-problem, put a print statment to check it.
+problem, put a print statement to check it.
 
 In your Haskell implementation, what aspects of the task were straightforward, and which ones felt laborious?
 
@@ -34,7 +34,7 @@ There's a few problems to this implementation. For starters, the most logical wa
 but requires heavy boxing and un-boxing of types. Therefore, the solution you suggested was to just create a list with a slot for each follower and leader, its place
 in the list represents its id. Some other issue was creating a data type for the Dance Card. You can't just import hashtable, you essentially need to create a list of pairs
 one is the dance and the other is the id of the leader/follower you're dancing with. This means you must create your own get and put operations, which took some time
-as well. The only really nice thing about Haskell is that you know when your variables/functions are atomic bcause you can literally declare them as such by passing
+as well. The only really nice thing about Haskell is that you know when your variables/functions are atomic because you can literally declare them as such by passing
 them into the function atomically.
 
 Again, what kinds of bugs arose during development, and how did you handle them?
